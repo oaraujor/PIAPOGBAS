@@ -1,0 +1,78 @@
+MINUTA 1
+________________________________________
+FECHA - 10-27-2023
+________________________________________
+HORA - 10PM
+________________________________________
+ASISTENTES: OCTAVIO, REGINA, SERGIO
+_________________________________________
+
+ESTRUCTURA APLICACION:
+
+Opcion Principal
+https://www.alphavantage.co/
+https://www.alphavantage.co/documentation/
+
+
+------Menu------
+---- consultar accion de "empresa" ahorita
+---- consultar empresa
+---- consultar historial
+---- ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes, 
+---- consultar tipo de cambio
+---- realizar calculo la cambio de divisa
+
+________________________________________
+ACUERDOS
+________________________________________
+'''''Octavio''''''
+
+--- Realizar la conexion de la aplicacion a la API, Json.
+--- lectura escritura y procesamiento/preparacion de datos
+--- consultar historial
+--- funciones adicionales que se requieran
+________________________________________
+
+'''''Regina''''''
+
+---- Menu, main
+---- Graficas en python
+---- calculo la cambio de divisa
+--- funciones adicionales que se requieran
+
+________________________________________
+
+'''''Sergio''''''
+---- Excel (openpyxl)
+---- consultar historial
+---- modulo de funciones
+--- funciones adicionales que se requieran
+
+________________________________________
+
+Notas:
+---La API no requiere llave, es accesada atravez de un protocolo http
+---Todos estaran encargados de manejar/procesar excepciones y validar datos/entradas
+---Todos trabajaran en diferentes funciones que se requieran
+
+OTRAS APIS:
+Opcion 2 - http://api.cfl.ca/ (Liga de fútbol canadiense)
+Opcion 3 - https://docs.openaq.org/ (Datos de calidad de aire abierto)
+________________________________________
+ENTORNO
+________________________________________
+
+GITHUB
+
+________________________________________
+
+AVANCES ESPERADOS PARA LA SIGUIENTE SEMANA:
+- TENER UN AVANCE ___MAIN__():
+- TENER YA UN METODO DE CONEXION ENTRE LA API, Y UN ARCHIVO LOCAL
+- TENER YA ESTABLECIDO EL REPOSITORIO GITHUB
+
+________________________________________
+
+SIGUIENTE REUNION:
+ LUNES 6 DE NOVIEMBRE 2023
+
