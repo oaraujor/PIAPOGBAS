@@ -1,14 +1,16 @@
 import os
 import matplotlib.pyplot as plt
+import apicon
+import modPia
 
 
 def co_accion():
     #aqui iria lo de consulta de accion
     print("hola")
 
-def co_empresa():
-    #aqui iria lo de consulta de empresa
-    print("hola")
+def consNasqadList():
+    modPia.verArchNasqad()
+    
 
 def co_historial():
     #aqui iria lo de consulta de historial
@@ -76,9 +78,9 @@ def cambios_div():
 def main():
 
     while True:
-        print("------Menu------")
-        print("1. Consultar acción de 'empresa' ahorita")
-        print("2. Consultar empresa")
+        print("------NASQUAD------")
+        print("1. Consultar acción de alguna accion NASQAD")
+        print("2. Consultar lista de empresas NASQUAD")
         print("3. Consultar historial")
         print("4. Ver gráfica de precio de empresa-divisa")
         print("5. Consultar tipo de cambio")
@@ -89,7 +91,7 @@ def main():
         if op == 1:
             co_accion()
         elif op == 2:
-            co_empresa()
+            consNasqadList()
         elif op == 3:
             co_historial()
         elif op == 4:

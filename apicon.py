@@ -21,7 +21,7 @@ def writeFILE(texto):
     except:
         return 0
     
-    chages 
+    #un cambio equis 
 
 def makeRequest(url):
     '''
