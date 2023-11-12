@@ -20,6 +20,8 @@ def writeFILE(texto):
             file.write(str(texto))
     except:
         return 0
+    
+    chages 
 
 def makeRequest(url):
     '''
