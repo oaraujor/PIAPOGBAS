@@ -76,11 +76,11 @@ def cambios_div():
 
 
 def main():
-
+    os.system('cls')
     while True:
         print("------NASQUAD------")
         print("1. Consultar acción de alguna accion NASQAD")
-        print("2. Consultar lista de empresas NASQUAD")
+        print("2. Consultar lista de empresas NASQUAD") #listo
         print("3. Consultar historial")
         print("4. Ver gráfica de precio de empresa-divisa")
         print("5. Consultar tipo de cambio")

@@ -13,5 +13,7 @@
 
 ## API:
 ### [AlphaVantage](https://www.alphavantage.co/)
+### [Lista de Nasqad](https://github.com/prediqtiv/alpha-vantage-cookbook/blob/master/symbol-lists.md)
+
 
 ## Funcionamiento:
