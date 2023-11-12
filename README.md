@@ -10,3 +10,8 @@
 ### - OCTAVIO ARAUJO ROSALES 2173394
 ### - SERGIO ARMANDO GARZA TREVIÑO 1986186
 ### - REGINA HERNANDEZ RODRIGUEZ 2000640
+
+## API:
+### [AlphaVantage](https://www.alphavantage.co/)
+
+## Funcionamiento:

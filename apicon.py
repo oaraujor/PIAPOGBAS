@@ -3,22 +3,47 @@ import json
 from datetime import datetime
 
 # writeFILE(data,archivoNom) #escritura de texto
-def writeFILE(texto, archivo):
-    with open(archivo, 'w') as file:
-        file.write(str(texto))
+def writeFILE(texto):
+    '''
+    Funcion que escribe los datos proporcionados por la api
+    a un archivo .txt
+
+    Param: texto (str)
+    Returns: 0 is existe error al iniciar/escribir un archivo
+    '''
+    fechaHoy = datetime.now().date()
+    fechaHoy = fechaHoy.strftime('%d-%m-%Y')
+    archivoNom = 'datosAPI\Data-' + fechaHoy +'.txt'
+
+    try:
+        with open(archivoNom, 'w') as file:
+            file.write(str(texto))
+    except:
+        return 0
+
+def makeRequest(url):
+    '''
+    Funcion encargada de realizar los API calls
+    Param: url (txt)
+            Ej:'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo'
+    Returns: 0 si error alguno (200)
+             data (formato json)
+    '''
+    try:
+        r = requests.get(url)
+        r.raise_for_status()  # Bandera de HTTPError para errores potenciales
+        data = r.json()
+        return data
     
+    except requests.RequestException as e:
+        print(f"Error making request: {e}")
+        return 0
 
-fechaHoy = datetime.now().date()
-fechaHoy = fechaHoy.strftime('%d-%m-%Y')
-archivoNom = 'datosAPI\Data-' + fechaHoy +'.txt'
+def crearlink(symb, int):
+    return 0
 
-# replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo'
-r = requests.get(url)
-data = r.json()
-
-keys = data.keys()
-for i in keys:
-    print(str(data[i]))
+#url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
+#datos = makeRequest(url)
+#writeFILE(str(datos))
 
 
