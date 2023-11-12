@@ -71,7 +71,24 @@ def cambios_div():
     #realizar calculo la cambio de divisa
     #irian calculos matematicos para el cambio de divisa
     print("hola")
+"""
+from forex_python.converter import CurrencyRates
 
+# Crear una instancia de CurrencyRates
+c = CurrencyRates()
+
+# Definir la cantidad y las monedas de origen y destino
+cantidad = 100  # Cantidad a convertir
+moneda_origen = "USD"  # Moneda de origen
+moneda_destino = "EUR"  # Moneda de destino
+
+# Realizar la conversión de moneda
+resultado = c.convert(moneda_origen, moneda_destino, cantidad)
+
+# Imprimir el resultado
+print(f"{cantidad} {moneda_origen} equivale a {resultado} {moneda_destino}")
+
+"""
 
 while True:
     print("------Menu------")
