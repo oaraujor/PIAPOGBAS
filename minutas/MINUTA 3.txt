@@ -1,6 +1,6 @@
 MINUTA 1
 ________________________________________
-FECHA - 11-14-2023
+FECHA - 11-17-2023
 ________________________________________
 HORA - 10PM
 ________________________________________
@@ -26,18 +26,17 @@ ________________________________________
 ACUERDOS (PENDIENTES)
 ________________________________________
 '''''Octavio''''''
---- PENDINTE: ESTANDARIZAR LA SALIDA DE LOS DATOS DE LA API PARA SER ENTREGADO A REGINA PARA LA CREACION DE LAS GRAFICAS
---- PENDIENTE 2: CAMBIO DE DIVISA
---- PENDIENTE 3: FUNCIONES RESTANTE 
+--- PENDINTES: PARA EL DIA 18 DE NOVIEMBRE CONCLUIR CON LO SIGUIENTE
+-------PENDIENTE 1: CAMBIO DE DIVISA
+-------PENDIENTE 2: FUNCIONES RESTANTES DE APICON
 ________________________________________
 
 '''''Regina''''''
----- PENDIENTE 2: CAMBIO DE DIVISA
----- PENDIENTE 3: FUNCIONES RESTANTE 
+---- Graficas(ESTA PARTE DEPENDE DE OCTAVIO)
 
 ________________________________________
 
-'''''Sergio''''''
+'''''Sergio'''''' (ESTA PARTE DEPENDE DE OCTAVIO)
 ---- EXCEL
 ---- PENDIENTE 3: FUNCIONES RESTANTES
 
@@ -60,13 +59,12 @@ GITHUB
 
 ________________________________________
 
-AVANCES ESPERADOS PARA LA SIGUIENTE SEMANA:
-- FINALIZAR CON LA PROGRAMACION DE LA ESTANDARIZACION DE LA SALIDA DE DATOS DE LA API
-- AVANZAR EL 50% DE LAS FUNCIONES
-- TENER UNA BASE DE OPENPYXL
+AVANCES ESPERADOS PARA 18:
+- CONCLUIR CON MAIN, APICON 
+- CONCLUIR CON OPENXLPY
 
 ________________________________________
 
 SIGUIENTE REUNION:
-- 17 NOVIEMBRE 2023
+- 20 NOVIEMBRE 2023 (ENTREGA DE PIA)
 

@@ -3,17 +3,21 @@ import json
 from datetime import datetime
 
 # writeFILE(data,archivoNom) #escritura de texto
-def writeFILE(texto):
+def writeFILE(texto, tipo):
     '''
     Funcion que escribe los datos proporcionados por la api
     a un archivo .txt
 
     Param: texto (str)
+            type (str) tipo de dato de la api (puede ser
+            nombre de empresa, accion etc etc)
     Returns: 0 is existe error al iniciar/escribir un archivo
     '''
+    tipo = str(tipo)
+
     fechaHoy = datetime.now().date()
     fechaHoy = fechaHoy.strftime('%d-%m-%Y')
-    archivoNom = 'datosAPI\Data-' + fechaHoy +'.txt'
+    archivoNom = 'datosAPI\Data-' + str(fechaHoy) +'-'+ str(tipo) +'.txt'
 
     try:
         with open(archivoNom, 'w') as file:
@@ -21,7 +25,6 @@ def writeFILE(texto):
     except:
         return 0
     
-    #un cambio equis 
 
 def makeRequest(url):
     '''
@@ -42,6 +45,18 @@ def makeRequest(url):
         return 0
 
 def crearlink(symb, int):
+    """
+    funcion que crea el nombre del link, en el cual se pediran los datos
+    de la api
+    Param:  symb <str> parametro que define la empresa
+    Returns: str
+    """
+    link = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo'
+    1 ano
+    6 meses
+    3 meses
+    1 makeRequest
+
     return 0
 
 #url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
