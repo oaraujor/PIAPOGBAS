@@ -3,7 +3,7 @@
 """
 
 import os as term
-def verArchNasqad():
+def verOpc(archivo):
     """
     funcion que permite visualizar la lista de las empresas NASQAD
     param:  archivo (str) > archivo donde se encuentra la lista nasquad
@@ -20,7 +20,6 @@ def verArchNasqad():
         for abvr, desc in list(dict.items())[inicio:final]:
             print(f"{abvr}\t\t{desc}")
 
-    archivo = 'NASDAQ.txt'
     dict = {}
     with open(archivo, 'r') as file:
         next(file) #saltarse la primera linea del archivo
@@ -34,7 +33,7 @@ def verArchNasqad():
     while True:
         mostrarListaNasqad(dict, act_pag, paginasTot)
 
-        nav = input("\nOptions: '>', '<', or 'salir'\n").lower()
+        nav = input("\nOpciones: '>', '<', or 'salir'\n").lower()
 
         if nav == '>' and act_pag < paginasTot:
             act_pag += 1

@@ -43,24 +43,39 @@ def makeRequest(url):
     except requests.RequestException as e:
         print(f"Error making request: {e}")
         return 0
-
-def crearlink(symb, int):
-    """
+"""
+def crearlinkStock(func):
+    
     funcion que crea el nombre del link, en el cual se pediran los datos
     de la api
     Param:  symb <str> parametro que define la empresa
     Returns: str
-    """
-    link = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo'
-    1 ano
-    6 meses
-    3 meses
-    1 makeRequest
+    
+    
+
+    link = 'https://www.alphavantage.co/query?function='
+
+    TIME_SERIES_INTRADAY
+    
+    '&symbol=IBM&interval=5min&apikey=demo'
+
 
     return 0
+"""
 
-#url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
-#datos = makeRequest(url)
-#writeFILE(str(datos))
+def crearlinkCurr(de, a):
+    """
+    funcion que crea el nombre del link, en el cual se pediran los datos
+    de la api
+    Param:  de <str> parametro que define la empresa
+            a <str>
+    Returns: link (str)
+    """
+    de = str(de).upper()
+    a = str(a).upper()
+    link = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency='+de+'&to_currency='+a+'&apikey=H59QLA4WONX2VGH4'
+    return link
+
+
 
 

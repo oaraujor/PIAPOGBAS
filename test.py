@@ -1,6 +1,10 @@
+import modPia
 import apicon
 
-s = input()
-val = input()
-r = apicon.crearlink(s,val):
-print(r)
+
+#modPia.verOpc("curr.txt")
+de = input()
+a = input()
+link = apicon.crearlinkCurr(de, a)
+data = apicon.makeRequest(link)
+apicon.writeFILE(data, "currMX_CAD")
