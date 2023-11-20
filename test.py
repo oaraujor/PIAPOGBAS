@@ -2,59 +2,55 @@ import modPia
 import apicon
 import json
 import os as term
-
-def verOpc(archivo):
-    """
-    Función que permite visualizar la lista de las empresas NASQAD y seleccionar un símbolo.
-    :param archivo: (str) Archivo donde se encuentra la lista NASQAD.
-    :return: (str) Símbolo seleccionado por el usuario.
-    """
-    def mostrarListaNasqad(dict, numpag, tot, tamano=5):
-        inicio = (numpag - 1) * tamano
-        final = inicio + tamano
+"""
+while True:
+        #consultar tipo de cambio
+        archivo = 'curr.txt'
+        moneda = modPia.verOpc(archivo)
+        link = apicon.crearlinkCurr("MXN", moneda)
+        print(link)
+        data = apicon.makeRequest(link)
+        apicon.writeFILE(data,"curr",moneda)
+        tipoCambio = apicon.procesarCurr(data)
         term.system('cls')
-        print("NASQUAD TRADING " + '(' + str(numpag) + '/' + str(tot) + ')' + '\n')
-        print("Simbolo\t\tDescripcion")
-        print("------\t\t-----------")
+        print("1 Peso Mexicano(MXN) equivale a: "+ str(tipoCambio) +str(moneda) )
 
-        for abvr, desc in list(dict.items())[inicio:final]:
-            print(f"{abvr}\t\t{desc}")
-
-    symbols = {}
-    archivo = str(archivo)
-    with open(archivo, 'r') as file:
-        next(file)  # Saltarse la primera línea del archivo
-        for line in file:
-            abvr, descrip = line.strip().split('\t')
-            symbols[abvr] = descrip
-
-    paginasTot = (len(symbols) + 4) // 5
-    act_pag = 1
-
-    while True:
-        mostrarListaNasqad(symbols, act_pag, paginasTot)
-        print("Opciones: 'salir' para salir")
-        print("'>' para siguiente pagina")
-        print("'<' para pagina atras")
-        nav = input("\Escriba el simbolo para consultar ").upper()
-
-        if nav == 'SALIR':
+        imp = input('Desea consultar otro tipo de cambio? ("SI", NO")')
+        imp = imp.upper()
+        if imp == 'NO':
             break
-        elif nav in symbols:
-            return nav
-        elif nav == '>' and act_pag < paginasTot:
-            act_pag += 1
-        elif nav == '<' and paginasTot > 1:
-            act_pag -= 1
-        elif nav == 'salir':
-            break
+        elif imp == 'SI':
+            continue
         else:
-            print("Simbolo no valido. Por favor, ingrese '>', '<','salir' o escoja in simbolo de la lista")
+            valid = False
+            while not valid:
+                a = input('Entrada no valida - Selecione "SI" o "NO"')
+                if a in ["SI","NO"]:
+                    valid = True
+                else:
+                    valid = False
+"""
 
-# Example of how to use the modified function:
-archivo = 'NASDAQ.txt''NASQAD.txt'
-selected_symbol = verOpc(archivo)
-if selected_symbol:
-    print(f"Símbolo seleccionado: {selected_symbol}")
-else:
-    print("Ningún símbolo seleccionado.")
+def procesarStock(json_data, func):
+    if str(func).upper() == "MONTHLY":
+        time_series_data = json_data.get("Monthly Time Series")
+    elif str(func).upper() == "DAILY":
+        time_series_data = json_data.get("Time Series (Daily)")
+    elif str(func).upper() == "WEEKLY":
+        time_series_data = json_data.get("Weekly Time Series")
+    else:
+        time_series_data = None
+
+    if time_series_data:
+        dates = []
+        close_values = []
+        for date, values in time_series_data.items():
+            dates.append(date)
+            close_values.append(float(values.get('4. close', 0)))
+
+    #result = json.dumps([dates, close_values])
+    results = [dates,close_values]
+    print(len(dates))
+    print(len(close_values))
+    return results
+

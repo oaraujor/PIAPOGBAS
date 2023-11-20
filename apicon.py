@@ -38,7 +38,11 @@ def makeRequest(url):
         r = requests.get(url)
         r.raise_for_status()  # Bandera de HTTPError para errores potenciales
         data = r.json()
-        json_data = json.loads(str(data))
+        print(data)
+        #data_str = str(data)
+        #data_str = data_str.replace("'", '"')
+        #json_data = json.loads(str(data)) #str(data)
+        json_data = json.loads(json.dumps(data))
         return json_data
     
     except requests.RequestException as e:
@@ -75,28 +79,32 @@ def crearlinkCurr(de, a):
     link = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency='+de+'&to_currency='+a+'&apikey=H59QLA4WONX2VGH4'
     return link
 
-def process_json(json_data, func):
+def procesarStock(json_data, func):
     if str(func).upper() == "MONTHLY":
         time_series_data = json_data.get("Monthly Time Series")
     elif str(func).upper() == "DAILY":
         time_series_data = json_data.get("Time Series (Daily)")
     elif str(func).upper() == "WEEKLY":
         time_series_data = json_data.get("Weekly Time Series")
+    else:
+        time_series_data = None
 
-    if not time_series_data:
-        return None
-
-    dates = []
-    close_values = []
-
-    for date, values in time_series_data.items():
-        dates.append(date)
-        close_values.append(float(values.get('4. close', 0)))
-
-    #result = json.dumps([dates, close_values])
+    if time_series_data:
+        dates = []
+        close_values = []
+        for date, values in time_series_data.items():
+            dates.append(date)
+            close_values.append(float(values.get('4. close', 0)))
     results = [dates,close_values]
     print(len(dates))
     print(len(close_values))
     return results
 
-
+def procesarCurr(jsonDatos):
+    try:
+        # extraer el valor numerico de '5. Exchange Rate'
+        tipoCambio = float(jsonDatos['Realtime Currency Exchange Rate']['5. Exchange Rate'])
+        return tipoCambio
+    except (KeyError, ValueError):
+        # posible error retorna none
+        return None

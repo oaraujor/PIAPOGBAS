@@ -1,1 +1,0 @@
-{'Realtime Currency Exchange Rate': {'1. From_Currency Code': 'MXN', '2. From_Currency Name': 'Mexican Peso', '3. To_Currency Code': 'CAD', '4. To_Currency Name': 'Canadian Dollar', '5. Exchange Rate': '0.07915000', '6. Last Refreshed': '2023-11-19 01:07:20', '7. Time Zone': 'UTC', '8. Bid Price': '0.07914700', '9. Ask Price': '0.07915000'}}

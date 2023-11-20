@@ -13,7 +13,7 @@ def verOpc(archivo):
         inicio = (numpag - 1) * tamano
         final = inicio + tamano
         term.system('cls')
-        print("NASQUAD TRADING " + '(' + str(numpag) + '/' + str(tot) + ')' + '\n')
+        print("NASQUAD - Tipo de Cambio " + '(' + str(numpag) + '/' + str(tot) + ')' + '\n')
         print("Simbolo\t\tDescripcion")
         print("------\t\t-----------")
 

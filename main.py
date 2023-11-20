@@ -9,6 +9,22 @@ def co_historial(empresa):
 
 def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
+    def constGraf(lista):
+        intervalos = listas[0]
+        precio = listas[1]
+
+        # Crear el gráfico de línea
+        plt.plot(intervalos, precio, marker='o', linestyle='-')
+
+        # Agregar etiquetas y título
+        plt.xlabel("Fecha")
+        plt.ylabel("Precio")
+        plt.title("Evolución del Precio de la Empresa en un periodo de "+str(op))
+
+        # Mostrar la gráfica
+        plt.grid()  # Agregar una cuadrícula de fondo (opcional)
+        plt.show()
+
     while True:
         os.system('cls')
         print("----Precio "+ str(empresa) + "----")
@@ -16,52 +32,58 @@ def v_graficas(empresa):
         print("    2. Semanal")
         print("    3. Mensual")
         print("    5. Salir")
-        
-        op = int(input("Seleccione una opcion: "))
-        if op == 1:
+        op = input("Seleccione una opcion: ")
+        if op == '1':
             #grafica de 24 hrs
-            link = apicon.crearlinkStock("DAYLY", empresa)
-            datos = apicon.makeRequest(link)
-            listas = apicon.process_json(datos,'DAYLY')
-
-        elif op == 2:
+            tipo = "DAILY"
+        elif op == '2':
             #grafica de la semana
-            link = apicon.crearlinkStock("WEEKLY", empresa)
-            datos = apicon.makeRequest(link)
-            listas = apicon.process_json(datos,'DAYLY')
-        elif op == 3:
+            tipo = "WEEKLY"
+        elif op == '3':
             #grafica del mes
-            link = apicon.crearlinkStock("MONTHLY", empresa)
-            datos = apicon.makeRequest(link)
-            listas = apicon.process_json(datos,'DAYLY')
-        elif op == 5:
+            tipo = "MONTHLY"
+        elif op == '5':
             #salir
             print("Saliendo...Volviendo al menú")
             return
         else:
             print("Opcion no valida intenta de nuevo. ")
-        apicon.writeFILE(listas)
-'''
-    # Datos de ejemplo
-    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
-    precio = [100, 120, 130, 110, 140, 150]
+            continue
 
-    # Crear el gráfico de línea
-    plt.plot(meses, precio, marker='o', linestyle='-')
+        link = apicon.crearlinkStock(tipo, empresa)
+        datos = apicon.makeRequest(link)
+        listas = apicon.procesarStock(datos,tipo)
+        apicon.writeFILE(listas, tipo, empresa)
+        constGraf(listas)
 
-    # Agregar etiquetas y título
-    plt.xlabel("Meses")
-    plt.ylabel("Precio")
-    plt.title("Evolución del Precio de la Empresa en los Últimos 6 Meses")
-
-    # Mostrar la gráfica
-    plt.grid()  # Agregar una cuadrícula de fondo (opcional)
-    plt.show()
-'''
 
 def c_tipo_cambio():
-    #consultar tipo de cambio
-    print("hola")
+    while True:
+        #consultar tipo de cambio
+        archivo = 'curr.txt'
+        moneda = modPia.verOpc(archivo)
+        link = apicon.crearlinkCurr("MXN", moneda)
+        print(link)
+        data = apicon.makeRequest(link)
+        apicon.writeFILE(data,"curr",moneda)
+        tipoCambio = apicon.procesarCurr(data)
+        os.system('cls')
+        print("1 Peso Mexicano(MXN) equivale a: "+ str(tipoCambio) +str(moneda) )
+
+        imp = input('Desea consultar otro tipo de cambio? ("SI", NO")')
+        imp = imp.upper()
+        if imp == 'NO':
+            break
+        elif imp == 'SI':
+            continue
+        else:
+            valid = False
+            while not valid:
+                a = input('Entrada no valida - Selecione "SI" o "NO"')
+                if a in ["SI","NO"]:
+                    valid = True
+                else:
+                    valid = False
 
 def cambios_div():
     #realizar calculo la cambio de divisa
@@ -76,17 +98,15 @@ def main():
     archivo = "NASDAQ.txt"
     empresa = modPia.verOpc(archivo)
     #empresa es la empresa seleccionada por el usuario
-
     while True:
-        print('------'+str(empresa)+'------')
+        print('------Menu------')
         print("1. Consultar historial de empresa")
-        print("2. Ver gráfica de precio de"+str(empresa))
-        print("3. Datos estadisticos de"+ str(empresa))
+        print("2. Ver gráfica de precio de una empresa")
+        print("3. Datos estadisticos de una empresa")
         print('Otros:')
         print("4. Consultar un tipo de cambio")
         print("5. Realizar cálculo de cambio de divisa")
-        print("6. Realizar cálculo de cambio de divisa")
-        print("7. Salir")
+        print("6. Salir")
         op = int(input("Ingrese una opcion: "))
         if op == 1:
             co_historial(empresa)
