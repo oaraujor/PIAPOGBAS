@@ -3,13 +3,8 @@ import matplotlib.pyplot as plt
 import apicon
 import modPia
 
-
-def co_accion():
-    #aqui iria lo de consulta de accion
-    print("hola")
-
 def consNasqadList():
-    modPia.verArchNasqad()
+    modPia.verOpc('NASQAD.txt')
     
 
 def co_historial():
@@ -18,35 +13,46 @@ def co_historial():
 
 def v_graficas():
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
-    print("hola")
+    empresa = input("ingrese la empresa que quiere visualizar")
+    valido = modPia.validacion_Emp(empresa)
+    while not valido:
+        os.system('cls')
+        print('Empresa no encontrada')
+        empresa = input("Ingrese la empresa que quiere visualizar")
+        valido = modPia.validacion_Emp(empresa)
+
     while True:
+        os.system('cls')
         print("----Precio Empresa-Divisa----")
-        print("    1. Un Año ")
-        print("    2. 6 Meses ")
-        print("    3. 3 Meses ")
-        print("    4. Ultimo mes ")
+        print("    1. Dia")
+        print("    2. Semanal")
+        print("    3. Mensual")
         print("    5. Salir")
         
         op = int(input("Seleccione una opcion: "))
         if op == 1:
-            #grafica de un año
-            print("hola")
+            #grafica de 24 hrs
+            link = apicon.crearlinkStock("DAYLY", empresa)
+            datos = apicon.makeRequest(link)
+            listas = apicon.process_json(datos,'DAYLY')
+
         elif op == 2:
-            #grafica de 6 meses
-            print("hola")
+            #grafica de la semana
+            link = apicon.crearlinkStock("WEEKLY", empresa)
+            datos = apicon.makeRequest(link)
+            listas = apicon.process_json(datos,'DAYLY')
         elif op == 3:
-            #grafica de 3 meses
-            print("hola")
-        elif op == 4:
-            #grafica del ultimo mes
-            print("hola")
+            #grafica del mes
+            link = apicon.crearlinkStock("MONTHLY", empresa)
+            datos = apicon.makeRequest(link)
+            listas = apicon.process_json(datos,'DAYLY')
         elif op == 5:
             #salir
             print("Saliendo...Volviendo al menú")
             return
         else:
             print("Opcion no valida intenta de nuevo. ")
-
+        apicon.writeFILE(listas)
 '''
     # Datos de ejemplo
     meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"]
@@ -74,33 +80,37 @@ def cambios_div():
     #irian calculos matematicos para el cambio de divisa
     print("hola")
 
+def datestadisticos():
+    print("hola")
 
 def main():
     os.system('cls')
+    archivo = "NASQAD.txt"
+    empresa = modPia.verOpc(archivo)
+    #empresa es la empresa seleccionada por el usuario
+
     while True:
-        print("------NASQUAD------")
-        print("1. Consultar acción de alguna accion NASQAD")
-        print("2. Consultar lista de empresas NASQUAD") #listo
-        print("3. Consultar historial")
-        print("4. Ver gráfica de precio de empresa-divisa")
-        print("5. Consultar tipo de cambio")
+        print('------'+str(empresa)+'------')
+        print("1. Consultar historial de empresa")
+        print("2. Ver gráfica de precio de"+str(empresa))
+        print("3. Datos estadisticos de"+ str(empresa))
+        print('Otros:')
+        print("4. Consultar un tipo de cambio")
+        print("5. Realizar cálculo de cambio de divisa")
         print("6. Realizar cálculo de cambio de divisa")
         print("7. Salir")
         op = int(input("Ingrese una opcion: "))
-
         if op == 1:
-            co_accion()
-        elif op == 2:
-            consNasqadList()
-        elif op == 3:
             co_historial()
-        elif op == 4:
+        elif op == 2:
             v_graficas()
-        elif op == 5:
+        elif op == 3:
+            datestadisticos()
+        elif op == 4:
             c_tipo_cambio()
-        elif op == 6:
+        elif op == 5:
             cambios_div()
-        elif op == 7:
+        elif op == 6:
             print("Saliendo del programa. Bye Bye :)")
             break
         else:

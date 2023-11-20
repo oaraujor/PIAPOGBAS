@@ -5,41 +5,62 @@
 import os as term
 def verOpc(archivo):
     """
-    funcion que permite visualizar la lista de las empresas NASQAD
-    param:  archivo (str) > archivo donde se encuentra la lista nasquad
-    return: NONE
+    Función que permite visualizar la lista de las empresas NASQAD y seleccionar un símbolo.
+    :param archivo: (str) Archivo donde se encuentra la lista NASQAD.
+    :return: (str) Símbolo seleccionado por el usuario.
     """
     def mostrarListaNasqad(dict, numpag, tot, tamano=5):
         inicio = (numpag - 1) * tamano
         final = inicio + tamano
         term.system('cls')
-        print("NASQUAD TRADING "+ '('+str(numpag)+'/'+ str(tot)+')'+'\n')
+        print("NASQUAD TRADING " + '(' + str(numpag) + '/' + str(tot) + ')' + '\n')
         print("Simbolo\t\tDescripcion")
         print("------\t\t-----------")
 
         for abvr, desc in list(dict.items())[inicio:final]:
             print(f"{abvr}\t\t{desc}")
 
-    dict = {}
+    symbols = {}
+    archivo = str(archivo)
     with open(archivo, 'r') as file:
-        next(file) #saltarse la primera linea del archivo
+        next(file)  # Saltarse la primera línea del archivo
         for line in file:
             abvr, descrip = line.strip().split('\t')
-            dict[abvr] = descrip
+            symbols[abvr] = descrip
 
-    paginasTot = (len(dict) + 4) // 5
+    paginasTot = (len(symbols) + 4) // 5
     act_pag = 1
 
     while True:
-        mostrarListaNasqad(dict, act_pag, paginasTot)
+        mostrarListaNasqad(symbols, act_pag, paginasTot)
+        print("Opciones: 'salir' para salir")
+        print("'>' para siguiente pagina")
+        print("'<' para pagina atras")
+        nav = input("\Escriba el simbolo para consultar ").upper()
 
-        nav = input("\nOpciones: '>', '<', or 'salir'\n").lower()
-
-        if nav == '>' and act_pag < paginasTot:
+        if nav == 'SALIR':
+            break
+        elif nav in symbols:
+            return nav
+        elif nav == '>' and act_pag < paginasTot:
             act_pag += 1
         elif nav == '<' and paginasTot > 1:
             act_pag -= 1
         elif nav == 'salir':
             break
         else:
-            print("Invalid input. Please enter 'next', 'back', or 'exit'.")
+            print("Simbolo no valido. Por favor, ingrese '>', '<','salir' o escoja in simbolo de la lista")
+
+def validacion_Emp(emp, archivo='NASQAD.txt'):
+    try:
+        with open(archivo, 'r') as file:
+            lines = file.readlines()[1:]  # Skip the header line
+            symbols = [line.split('\t')[0] for line in lines]
+
+            if emp in symbols:
+                return True
+            else:
+                return False
+    except FileNotFoundError:
+        print(f"Error: Archivo '{archivo}' no encontrado")
+        return False
