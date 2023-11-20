@@ -1,8 +1,6 @@
-"""
-    Modulo Py donde se enceuntran unicamente las funciones a usar en el main
-"""
-
 import os as term
+import matplotlib.pyplot as plt
+
 def verOpc(archivo):
     """
     Función que permite visualizar la lista de las empresas NASQAD y seleccionar un símbolo.
@@ -64,3 +62,19 @@ def validacion_Emp(emp, archivo='NASQAD.txt'):
     except FileNotFoundError:
         print(f"Error: Archivo '{archivo}' no encontrado")
         return False
+    
+def constGraf(lista):
+        intervalos = lista[0]
+        precio = lista[1]
+
+        # Crear el gráfico de línea
+        plt.plot(intervalos, precio, marker='o', linestyle='-')
+
+        # Agregar etiquetas y título
+        plt.xlabel("Fecha")
+        plt.ylabel("Precio")
+        plt.title("Evolución del Precio de la Empresa en un periodo de "+str(op))
+
+        # Mostrar la gráfica
+        plt.grid()  # Agregar una cuadrícula de fondo (opcional)
+        plt.show()

@@ -1,30 +1,14 @@
 import os
-import matplotlib.pyplot as plt
 import apicon
 import modPia
 
+#pendiente
 def co_historial(empresa):
-    #aqui iria lo de consulta de historial
+    
     print("hola")
 
 def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
-    def constGraf(lista):
-        intervalos = lista[0]
-        precio = lista[1]
-
-        # Crear el gráfico de línea
-        plt.plot(intervalos, precio, marker='o', linestyle='-')
-
-        # Agregar etiquetas y título
-        plt.xlabel("Fecha")
-        plt.ylabel("Precio")
-        plt.title("Evolución del Precio de la Empresa en un periodo de "+str(op))
-
-        # Mostrar la gráfica
-        plt.grid()  # Agregar una cuadrícula de fondo (opcional)
-        plt.show()
-
     while True:
         os.system('cls')
         print("----Precio "+ str(empresa) + "----")
@@ -54,8 +38,7 @@ def v_graficas(empresa):
         datos = apicon.makeRequest(link)
         listas = apicon.procesarStock(datos,tipo)
         apicon.writeFILE(listas, tipo, empresa)
-        constGraf(listas)
-
+        modPia.constGraf(listas)
 
 def c_tipo_cambio():
     while True:
@@ -86,10 +69,35 @@ def c_tipo_cambio():
                     valid = False
 
 def cambios_div():
-    #realizar calculo la cambio de divisa
-    #irian calculos matematicos para el cambio de divisa
-    print("hola")
+    while True:
+        #hacer un tipo de cambio de divisa tipo de cambio
+        archivo = 'curr.txt'
+        moneda = modPia.verOpc(archivo)
+        link = apicon.crearlinkCurr("MXN", moneda)
+        print(link)
+        data = apicon.makeRequest(link)
+        apicon.writeFILE(data,"curr",moneda)
+        tipoCambio = apicon.procesarCurr(data)
+        os.system('cls')
+        mxn = input('Ingrese el monto de MXN a cambiar a ' + str(moneda))
+        cambio = mxn * tipoCambio
+        print(str(mxn) + " Pesos Mexicanos equivalen a: "+ str(cambio) +str(moneda) )
+        imp = input('Desea consultar otro tipo de cambio? ("SI", NO")')
+        imp = imp.upper()
+        if imp == 'NO':
+            break
+        elif imp == 'SI':
+            continue
+        else:
+            valid = False
+            while not valid:
+                a = input('Entrada no valida - Selecione "SI" o "NO"')
+                if a in ["SI","NO"]:
+                    valid = True
+                else:
+                    valid = False
 
+#pendiente
 def datestadisticos(empresa):
     print("hola")
 
