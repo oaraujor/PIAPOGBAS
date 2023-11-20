@@ -73,7 +73,7 @@ def constGraf(lista):
         # Agregar etiquetas y título
         plt.xlabel("Fecha")
         plt.ylabel("Precio")
-        plt.title("Evolución del Precio de la Empresa en un periodo de "+str(op))
+        plt.title("Evolución del Precio de la Empresa en un periodo de ")
 
         # Mostrar la gráfica
         plt.grid()  # Agregar una cuadrícula de fondo (opcional)

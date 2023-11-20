@@ -99,6 +99,7 @@ def procesarStock(json_data, func):
     print(len(dates))
     print(len(close_values))
     return results
+    
 
 def procesarCurr(jsonDatos):
     try:
@@ -108,3 +109,4 @@ def procesarCurr(jsonDatos):
     except (KeyError, ValueError):
         # posible error retorna none
         return None
+

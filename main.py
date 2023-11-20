@@ -2,10 +2,12 @@ import os
 import apicon
 import modPia
 
+
 #pendiente
+
 def co_historial(empresa):
-    
-    print("hola")
+  # Consultar historial de una empresa
+    print('KK')
 
 def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
@@ -15,7 +17,7 @@ def v_graficas(empresa):
         print("    1. Dia")
         print("    2. Semanal")
         print("    3. Mensual")
-        print("    5. Salir")
+        print("    4. Salir")
         op = input("Seleccione una opcion: ")
         if op == '1':
             #grafica de 24 hrs
@@ -26,7 +28,7 @@ def v_graficas(empresa):
         elif op == '3':
             #grafica del mes
             tipo = "MONTHLY"
-        elif op == '5':
+        elif op == '4':
             #salir
             os.system('cls')
             return
