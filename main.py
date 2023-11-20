@@ -3,27 +3,15 @@ import matplotlib.pyplot as plt
 import apicon
 import modPia
 
-def consNasqadList():
-    modPia.verOpc('NASQAD.txt')
-    
-
-def co_historial():
+def co_historial(empresa):
     #aqui iria lo de consulta de historial
     print("hola")
 
-def v_graficas():
+def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
-    empresa = input("ingrese la empresa que quiere visualizar")
-    valido = modPia.validacion_Emp(empresa)
-    while not valido:
-        os.system('cls')
-        print('Empresa no encontrada')
-        empresa = input("Ingrese la empresa que quiere visualizar")
-        valido = modPia.validacion_Emp(empresa)
-
     while True:
         os.system('cls')
-        print("----Precio Empresa-Divisa----")
+        print("----Precio "+ str(empresa) + "----")
         print("    1. Dia")
         print("    2. Semanal")
         print("    3. Mensual")
@@ -80,12 +68,12 @@ def cambios_div():
     #irian calculos matematicos para el cambio de divisa
     print("hola")
 
-def datestadisticos():
+def datestadisticos(empresa):
     print("hola")
 
 def main():
     os.system('cls')
-    archivo = "NASQAD.txt"
+    archivo = "NASDAQ.txt"
     empresa = modPia.verOpc(archivo)
     #empresa es la empresa seleccionada por el usuario
 
@@ -101,11 +89,11 @@ def main():
         print("7. Salir")
         op = int(input("Ingrese una opcion: "))
         if op == 1:
-            co_historial()
+            co_historial(empresa)
         elif op == 2:
-            v_graficas()
+            v_graficas(empresa)
         elif op == 3:
-            datestadisticos()
+            datestadisticos(empresa)
         elif op == 4:
             c_tipo_cambio()
         elif op == 5:

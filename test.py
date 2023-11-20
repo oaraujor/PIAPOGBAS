@@ -33,7 +33,6 @@ def verOpc(archivo):
 
     while True:
         mostrarListaNasqad(symbols, act_pag, paginasTot)
-
         print("Opciones: 'salir' para salir")
         print("'>' para siguiente pagina")
         print("'<' para pagina atras")
@@ -53,7 +52,7 @@ def verOpc(archivo):
             print("Simbolo no valido. Por favor, ingrese '>', '<','salir' o escoja in simbolo de la lista")
 
 # Example of how to use the modified function:
-archivo = 'NASDAQ.txt'
+archivo = 'NASDAQ.txt''NASQAD.txt'
 selected_symbol = verOpc(archivo)
 if selected_symbol:
     print(f"Símbolo seleccionado: {selected_symbol}")
