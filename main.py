@@ -10,8 +10,8 @@ def co_historial(empresa):
 def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
     def constGraf(lista):
-        intervalos = listas[0]
-        precio = listas[1]
+        intervalos = lista[0]
+        precio = lista[1]
 
         # Crear el gráfico de línea
         plt.plot(intervalos, precio, marker='o', linestyle='-')
@@ -44,7 +44,7 @@ def v_graficas(empresa):
             tipo = "MONTHLY"
         elif op == '5':
             #salir
-            print("Saliendo...Volviendo al menú")
+            os.system('cls')
             return
         else:
             print("Opcion no valida intenta de nuevo. ")
