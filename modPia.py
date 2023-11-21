@@ -1,5 +1,7 @@
 import os as term
+import statistics
 import matplotlib.pyplot as plt
+
 
 def verOpc(archivo):
     """
@@ -32,9 +34,9 @@ def verOpc(archivo):
     while True:
         mostrarListaNasqad(symbols, act_pag, paginasTot)
         print("Opciones: 'salir' para salir")
-        print("'>' para siguiente pagina")
-        print("'<' para pagina atras")
-        nav = input("\Escriba el simbolo para consultar ").upper()
+        print("           '>' para siguiente pagina")
+        print("           '<' para pagina atras")
+        nav = input("Escriba el simbolo de una empresa para consultar ").upper()
 
         if nav == 'SALIR':
             break
@@ -52,7 +54,7 @@ def verOpc(archivo):
 def validacion_Emp(emp, archivo='NASQAD.txt'):
     try:
         with open(archivo, 'r') as file:
-            lines = file.readlines()[1:]  # Skip the header line
+            lines = file.readlines()[1:]  # saltarse el titulo
             symbols = [line.split('\t')[0] for line in lines]
 
             if emp in symbols:
@@ -63,7 +65,7 @@ def validacion_Emp(emp, archivo='NASQAD.txt'):
         print(f"Error: Archivo '{archivo}' no encontrado")
         return False
     
-def constGraf(lista):
+def constGraf(lista, empresa):
         intervalos = lista[0]
         precio = lista[1]
 
@@ -73,8 +75,31 @@ def constGraf(lista):
         # Agregar etiquetas y título
         plt.xlabel("Fecha")
         plt.ylabel("Precio")
-        plt.title("Evolución del Precio de la Empresa en un periodo de ")
+        plt.title("Evolución del Precio de la Empresa " + str(empresa))
 
         # Mostrar la gráfica
         plt.grid()  # Agregar una cuadrícula de fondo (opcional)
         plt.show()
+
+def datosEst(listaDeDatos, tipo):
+    # Calcular 
+    mean_price = statistics.mean(listaDeDatos)
+
+    # Calculate standard deviation
+    std_deviation = statistics.stdev(listaDeDatos)
+
+    # Calculate volatility (assuming daily prices)
+    # You might want to adjust the multiplier for weekly or monthly volatility
+    # Calculate volatility
+    if tipo == 'DAILY':
+        # Assuming daily prices, use the square root of the number of trading days in a year
+        volatility = std_deviation * (252**0.5)
+    elif tipo == 'WEEKLY':
+        # Adjust for weekly volatility
+        volatility = std_deviation * (52**0.5)
+    elif tipo == 'MONTHLY':
+        # Adjust for monthly volatility
+        volatility = std_deviation * (12**0.5)
+    else:
+        volatility = 0
+    return mean_price, std_deviation, volatility

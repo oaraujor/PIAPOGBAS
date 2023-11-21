@@ -1,0 +1,1 @@
+{'Realtime Currency Exchange Rate': {'1. From_Currency Code': 'MXN', '2. From_Currency Name': 'Mexican Peso', '3. To_Currency Code': 'BHD', '4. To_Currency Name': 'Bahraini Dinar', '5. Exchange Rate': '0.02206000', '6. Last Refreshed': '2023-11-21 04:05:42', '7. Time Zone': 'UTC', '8. Bid Price': '0.02205900', '9. Ask Price': '0.02206000'}}

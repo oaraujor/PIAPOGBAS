@@ -17,7 +17,7 @@ def writeFILE(texto, tipo, emp):
 
     fechaHoy = datetime.now().date()
     fechaHoy = fechaHoy.strftime('%d-%m-%Y')
-    archivoNom = 'datosAPI\Data-' + str(fechaHoy) +'-'+ str(tipo) +str(emp)+'.txt'
+    archivoNom = 'datosAPI\Datos-' + str(fechaHoy) +'-'+ str(tipo) + '-' + str(emp)+'.txt'
 
     try:
         with open(archivoNom, 'w') as file:
@@ -25,7 +25,6 @@ def writeFILE(texto, tipo, emp):
     except:
         return 0
     
-
 def makeRequest(url):
     '''
     Funcion encargada de realizar los API calls
@@ -38,10 +37,6 @@ def makeRequest(url):
         r = requests.get(url)
         r.raise_for_status()  # Bandera de HTTPError para errores potenciales
         data = r.json()
-        print(data)
-        #data_str = str(data)
-        #data_str = data_str.replace("'", '"')
-        #json_data = json.loads(str(data)) #str(data)
         json_data = json.loads(json.dumps(data))
         return json_data
     
@@ -64,7 +59,6 @@ def crearlinkStock(func, symb):
         return link
     else:
         return 0
-
 
 def crearlinkCurr(de, a):
     """
@@ -96,10 +90,9 @@ def procesarStock(json_data, func):
             dates.append(date)
             close_values.append(float(values.get('4. close', 0)))
     results = [dates,close_values]
-    print(len(dates))
-    print(len(close_values))
+    #print(len(dates))
+    #print(len(close_values))
     return results
-    
 
 def procesarCurr(jsonDatos):
     try:
@@ -109,4 +102,3 @@ def procesarCurr(jsonDatos):
     except (KeyError, ValueError):
         # posible error retorna none
         return None
-

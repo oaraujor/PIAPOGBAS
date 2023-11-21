@@ -1,0 +1,1 @@
+{'Realtime Currency Exchange Rate': {'1. From_Currency Code': 'MXN', '2. From_Currency Name': 'Mexican Peso', '3. To_Currency Code': 'ANG', '4. To_Currency Name': 'Netherlands Antillean Guilder', '5. Exchange Rate': '0.10549000', '6. Last Refreshed': '2023-11-21 04:50:32', '7. Time Zone': 'UTC', '8. Bid Price': '0.10548500', '9. Ask Price': '0.10549500'}}

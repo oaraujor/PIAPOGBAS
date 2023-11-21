@@ -5,12 +5,6 @@ import pandas as pd
 from openpyxl import Workbook
 from datetime import datetime
 
-#pendiente
-
-def co_historial(empresa):
-  # Consultar historial de una empresa
-    print('KK')
-
 def v_graficas(empresa):
     #ver grafica de precio de empresa-divisa x (1 año, 6 meses, 3 meses, ultimo mes)
     while True:
@@ -42,7 +36,7 @@ def v_graficas(empresa):
         datos = apicon.makeRequest(link)
         listas = apicon.procesarStock(datos,tipo)
         apicon.writeFILE(listas, tipo, empresa)
-        modPia.constGraf(listas)
+        modPia.constGraf(listas, empresa)
 
 def c_tipo_cambio():
     while True:
@@ -50,7 +44,7 @@ def c_tipo_cambio():
         archivo = 'curr.txt'
         moneda = modPia.verOpc(archivo)
         link = apicon.crearlinkCurr("MXN", moneda)
-        print(link)
+        #print(link)
         data = apicon.makeRequest(link)
         apicon.writeFILE(data,"curr",moneda)
         tipoCambio = apicon.procesarCurr(data)
@@ -78,13 +72,12 @@ def cambios_div():
         archivo = 'curr.txt'
         moneda = modPia.verOpc(archivo)
         link = apicon.crearlinkCurr("MXN", moneda)
-        print(link)
         data = apicon.makeRequest(link)
         apicon.writeFILE(data,"curr",moneda)
         tipoCambio = apicon.procesarCurr(data)
         os.system('cls')
-        mxn = input('Ingrese el monto de MXN a cambiar a ' + str(moneda))
-        cambio = mxn * tipoCambio
+        mxn = input('Ingrese el monto de MXN a cambiar a ' + str(moneda)+" ")
+        cambio = int(mxn) * tipoCambio
         print(str(mxn) + " Pesos Mexicanos equivalen a: "+ str(cambio) +str(moneda) )
         imp = input('Desea consultar otro tipo de cambio? ("SI", NO")')
         imp = imp.upper()
@@ -101,11 +94,9 @@ def cambios_div():
                 else:
                     valid = False
 
-#pendiente
 def datestadisticos(empresa):
-    print("kk")
+    os.system('cls')
     while True:
-        os.system('cls')
         print("------Datos Estadisticos------")
         print("    1. Estadísticas Diarias")
         print("    2. Estadísticas Semanales")
@@ -131,10 +122,24 @@ def datestadisticos(empresa):
         listas = apicon.procesarStock(datos, tipo_periodo)
 
         # Crear archivo de Excel
+        datos = listas[1]
+        promedio, dvs, volatilidad = modPia.datosEst(datos, op)
+        os.system('cls')
+        print(f"El precio promedio de {empresa} es:  {promedio}")
+        print(f"La desviacion estandar de {empresa} es:  {dvs}")
+        print(f"La volatilidad de la empresa: {empresa} es:  {volatilidad}")
         crear_excel(listas, tipo_periodo, empresa)
 
+        put = input("Desea hacer otra consulta? SI/NO").upper()
+        if put == 'NO':
+            break
+        elif put == 'SI':
+            continue
+    return 
+
+
 def crear_excel(datos, tipo_periodo, empresa):
-    # Create a DataFrame with the data
+    # Crear un frame con los datos
     df = pd.DataFrame(datos)
 
     # Obtener la fecha actual para incluirla en el nombre del archivo
@@ -145,11 +150,10 @@ def crear_excel(datos, tipo_periodo, empresa):
 
     # Añadir los datos al libro de trabajo
     ws = wb.active
-    # Use the column names from the DataFrame
+    # usar la columna de nombres de dataframe
     ws.append(df.columns.tolist())
     for row in df.itertuples(index=False):
         ws.append(list(row))
-
     # Guardar el libro de trabajo como un archivo Excel
     nombre_archivo = f"{empresa}_{tipo_periodo}_{fecha_actual}.xlsx"
     wb.save(nombre_archivo)
@@ -163,26 +167,24 @@ def main():
     empresa = modPia.verOpc(archivo)
     #empresa es la empresa seleccionada por el usuario
     while True:
-        print('------Menu------')
-        print("1. Consultar historial de empresa")
-        print("2. Ver gráfica de precio de una empresa")
-        print("3. Datos estadisticos de una empresa")
+        os.system('cls')
+        print('------'+ str(empresa) +'------')
+        print("1. Ver gráfica de precio de " + str(empresa))
+        print("2. Datos estadisticos de "+ str(empresa))
         print('Otros:')
-        print("4. Consultar un tipo de cambio")
-        print("5. Realizar cálculo de cambio de divisa")
-        print("6. Salir")
+        print("3. Consultar un tipo de cambio")
+        print("4. Realizar cálculo de cambio de divisa")
+        print("5. Salir")
         op = int(input("Ingrese una opcion: "))
         if op == 1:
-            co_historial(empresa)
-        elif op == 2:
             v_graficas(empresa)
-        elif op == 3:
+        elif op == 2:
             datestadisticos(empresa)
-        elif op == 4:
+        elif op == 3:
             c_tipo_cambio()
-        elif op == 5:
+        elif op == 4:
             cambios_div()
-        elif op == 6:
+        elif op == 5:
             print("Saliendo del programa. Bye Bye :)")
             break
         else:
