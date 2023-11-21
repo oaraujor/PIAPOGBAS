@@ -1,7 +1,9 @@
 import os
 import apicon
 import modPia
-
+import pandas as pd
+from openpyxl import Workbook
+from datetime import datetime
 
 #pendiente
 
@@ -101,7 +103,59 @@ def cambios_div():
 
 #pendiente
 def datestadisticos(empresa):
-    print("hola")
+    print("kk")
+    while True:
+        os.system('cls')
+        print("------Datos Estadisticos------")
+        print("    1. Estadísticas Diarias")
+        print("    2. Estadísticas Semanales")
+        print("    3. Estadísticas Mensuales")
+        print("    4. Salir")
+        op = input("Seleccione una opción: ")
+
+        if op == '1':
+            tipo_periodo = "DAILY"
+        elif op == '2':
+            tipo_periodo = "WEEKLY"
+        elif op == '3':
+            tipo_periodo = "MONTHLY"
+        elif op == '4':
+            os.system('cls')
+            return
+        else:
+            print("Opción no válida. Intenta de nuevo.")
+            continue
+
+        link = apicon.crearlinkStock(tipo_periodo, empresa)
+        datos = apicon.makeRequest(link)
+        listas = apicon.procesarStock(datos, tipo_periodo)
+
+        # Crear archivo de Excel
+        crear_excel(listas, tipo_periodo, empresa)
+
+def crear_excel(datos, tipo_periodo, empresa):
+    # Create a DataFrame with the data
+    df = pd.DataFrame(datos)
+
+    # Obtener la fecha actual para incluirla en el nombre del archivo
+    fecha_actual = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Crear un libro de trabajo de Excel
+    wb = Workbook()
+
+    # Añadir los datos al libro de trabajo
+    ws = wb.active
+    # Use the column names from the DataFrame
+    ws.append(df.columns.tolist())
+    for row in df.itertuples(index=False):
+        ws.append(list(row))
+
+    # Guardar el libro de trabajo como un archivo Excel
+    nombre_archivo = f"{empresa}_{tipo_periodo}_{fecha_actual}.xlsx"
+    wb.save(nombre_archivo)
+
+    print(f"Archivo de Excel '{nombre_archivo}' creado con éxito.")
+    
 
 def main():
     os.system('cls')
