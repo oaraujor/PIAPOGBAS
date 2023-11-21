@@ -27,17 +27,14 @@ def verOpc(archivo):
         for line in file:
             abvr, descrip = line.strip().split('\t')
             symbols[abvr] = descrip
-
     paginasTot = (len(symbols) + 4) // 5
     act_pag = 1
-
     while True:
         mostrarListaNasqad(symbols, act_pag, paginasTot)
         print("Opciones: 'salir' para salir")
         print("           '>' para siguiente pagina")
         print("           '<' para pagina atras")
         nav = input("Escriba el simbolo de una empresa para consultar ").upper()
-
         if nav == 'SALIR':
             break
         elif nav in symbols:
@@ -82,23 +79,17 @@ def constGraf(lista, empresa):
         plt.show()
 
 def datosEst(listaDeDatos, tipo):
-    # Calcular 
+    # Calcular prom 
     mean_price = statistics.mean(listaDeDatos)
 
-    # Calculate standard deviation
+    # Calcular std 
     std_deviation = statistics.stdev(listaDeDatos)
 
-    # Calculate volatility (assuming daily prices)
-    # You might want to adjust the multiplier for weekly or monthly volatility
-    # Calculate volatility
     if tipo == 'DAILY':
-        # Assuming daily prices, use the square root of the number of trading days in a year
         volatility = std_deviation * (252**0.5)
     elif tipo == 'WEEKLY':
-        # Adjust for weekly volatility
         volatility = std_deviation * (52**0.5)
     elif tipo == 'MONTHLY':
-        # Adjust for monthly volatility
         volatility = std_deviation * (12**0.5)
     else:
         volatility = 0

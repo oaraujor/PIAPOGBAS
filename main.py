@@ -141,13 +141,10 @@ def datestadisticos(empresa):
 def crear_excel(datos, tipo_periodo, empresa):
     # Crear un frame con los datos
     df = pd.DataFrame(datos)
-
     # Obtener la fecha actual para incluirla en el nombre del archivo
     fecha_actual = datetime.now().strftime("%Y%m%d_%H%M%S")
-
     # Crear un libro de trabajo de Excel
     wb = Workbook()
-
     # Añadir los datos al libro de trabajo
     ws = wb.active
     # usar la columna de nombres de dataframe
